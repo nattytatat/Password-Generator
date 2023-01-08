@@ -91,6 +91,7 @@ var upperCasedCharacters = [
 // new empty array to push selected characters too
 var randomArray = [];
 charLength = 0;
+var password = '';
 
 //Character confirm Questions
 function getRandom() {
@@ -100,36 +101,39 @@ function getRandom() {
   var charNum = confirm("Would you like numbers?");
   var charSpec = confirm("Would you like special characters?");
 
-  //conditions, at least one character type needs to be selected to move to randomise function
-  if (!charLower && !charUpper && !charNum && !charSpec === true) {
+  //conditions, at least one character type needs to be selected to loop through objects
+  if (!charLower && !charUpper && !charNum && !charSpec) {
     alert("You must select at least one character type")
     return;
   } else {
-      // getRandom();
-      // alert("We are ready to rock!");
       // Push the chosen arrays from the prompt to an empty array
       if (charLower) randomArray.push(lowerCasedCharacters);
       if (charUpper) randomArray.push(upperCasedCharacters);
       if (charNum) randomArray.push(numericCharacters);
       if (charSpec) randomArray.push(specialCharacters);
 
-     // // randomise all the new objects in the array
-
+      // Initialize the password string
       var password = '';
-      for (let i = 0; i < charLength; i++) {
-      var randomArrayIndex = Math.floor(Math.random() * randomArray.length);
-      var randomCharacterSet = randomArray[randomArrayIndex];
-      var randomCharacterIndex = Math.floor(Math.random() * randomCharacterSet.length);
-      password += randomCharacterSet[randomCharacterIndex];
-}
 
-return password;
+      //while password length is less than chosen length
+      while (password.length < charLength) {
+        //add a random character to the empty array/randomArray
+        var randomArrayIndex = Math.floor(Math.random() * randomArray.length);
+        var randomCharIndex = Math.floor(Math.random() * randomArray[randomArrayIndex].length);
 
-}
+        // Add the randomly selected character to the password string
+        password += randomArray[randomArrayIndex][randomCharIndex];
 
+      
+    }
+
+    // return password;
+    return console.log(password);
+
+  }
   
-  
 }
+
 
 
 // Function to generate password with user input
@@ -141,7 +145,8 @@ function generatePassword() {
       //validate the length of the password, and check input is integer or user clicks cancel 
       if (charLength === null || !Number.isInteger(charLength) || charLength < 10 || charLength > 64) {
         alert("Password must be a number between 10 and 64");
-        return console.log(typeof charLength);
+        // Checking the typeof input as was always returning true when typing a letter
+        // return console.log(typeof charLength);
 
       } else {
         // go through confirm questions
@@ -150,9 +155,6 @@ function generatePassword() {
     
       
 }
-
-  
-
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
 
