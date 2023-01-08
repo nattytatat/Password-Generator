@@ -88,8 +88,49 @@ var upperCasedCharacters = [
   'Z'
 ];
 
-var userSelection = '';
+// new empty array to push selected characters too
 var randomArray = [];
+charLength = 0;
+
+//Character confirm Questions
+function getRandom() {
+
+  var charLower = confirm("Would you like lower case characters?");
+  var charUpper = confirm("Would you like Uppercase characters?");
+  var charNum = confirm("Would you like numbers?");
+  var charSpec = confirm("Would you like special characters?");
+
+  //conditions, at least one character type needs to be selected to move to randomise function
+  if (!charLower && !charUpper && !charNum && !charSpec === true) {
+    alert("You must select at least one character type")
+    return;
+  } else {
+      // getRandom();
+      // alert("We are ready to rock!");
+      // Push the chosen arrays from the prompt to an empty array
+      if (charLower) randomArray.push(lowerCasedCharacters);
+      if (charUpper) randomArray.push(upperCasedCharacters);
+      if (charNum) randomArray.push(numericCharacters);
+      if (charSpec) randomArray.push(specialCharacters);
+
+     // // randomise all the new objects in the array
+
+      var password = '';
+      for (let i = 0; i < charLength; i++) {
+      var randomArrayIndex = Math.floor(Math.random() * randomArray.length);
+      var randomCharacterSet = randomArray[randomArrayIndex];
+      var randomCharacterIndex = Math.floor(Math.random() * randomCharacterSet.length);
+      password += randomCharacterSet[randomCharacterIndex];
+}
+
+return password;
+
+}
+
+  
+  
+}
+
 
 // Function to generate password with user input
 function generatePassword() {
@@ -97,60 +138,20 @@ function generatePassword() {
       //assign user input to this variable. As prompt is input as string, use number constructor to convert
       charLength = Number(prompt("Enter the number of characters you would like in your password"));
 
-      //validate the length of the password, and check input is integer or user clicks cancels 
+      //validate the length of the password, and check input is integer or user clicks cancel 
       if (charLength === null || !Number.isInteger(charLength) || charLength < 10 || charLength > 64) {
         alert("Password must be a number between 10 and 64");
         return console.log(typeof charLength);
 
       } else {
         // go through confirm questions
-        arrayCollect();
+        getRandom();
       }
     
-      //Character confirm Questions
-      function arrayCollect() {
-
-      var charLower = confirm("Would you like lower case characters?");
-      var charUpper = confirm("Would you like Uppercase characters?");
-      var charNum = confirm("Would you like numbers?");
-      var charSpec = confirm("Would you like special characters?");
-
-      //conditions, at least one character type needs to be selected to move to randomise function
-      if (!charLower && !charUpper && !charNum && !charSpec === true) {
-        alert("You must select at least one character type")
-        return;
-      } else {
-        // getRandom();
-        alert("We are ready to rock!");
-      } 
       
-      }
-
 }
 
-  // Function for getting a random element from an array
-function getRandom(arr) {
-
-  // Push the chosen arrays from the prompt to an empty array
-  if (charLower) randomArray.push(lowerCasedCharacters);
-  if (charUpper) randomArray.push(upperCasedCharacters);
-  if (charNum) randomArray.push(numericCharacters);
-  if (charSpec) randomArray.push(specialCharacters);
-
-  // randomise all the new objects in the array
-  for (var i = 0; i < randomArray.length; i++){
-    var randomNum = Math.floor(Math.random() * randomArray.length);
-      userSelection += randomArray[randomNum];
-  }
-
-  return password;
-
-}
-
-
-
-      
-
+  
 
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
