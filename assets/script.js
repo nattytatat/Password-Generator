@@ -103,6 +103,8 @@ function generatePassword() {
   //validate the length of the password, and check input is integer or user clicks cancel 
   if (charLength === null || !Number.isInteger(charLength) || charLength < 10 || charLength > 64) {
     alert("Password must be a number between 10 and 64");
+    //stops the text area returning undefined
+    return password = '';
     // Checking the typeof input as was always returning true when typing a letter
     // return console.log(typeof charLength);
 
@@ -116,7 +118,7 @@ function generatePassword() {
     //conditions, at least one character type needs to be selected to loop through objects
     if (!charLower && !charUpper && !charNum && !charSpec) {
       alert("You must select at least one character type")
-      return;
+      return password = '';
     } else {
       // Push the chosen arrays from the prompt to an empty array
       if (charLower === true) randomArray.push(lowerCasedCharacters);
