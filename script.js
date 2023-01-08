@@ -89,14 +89,46 @@ var upperCasedCharacters = [
 ];
 
 var userSelection = '';
-var charLength = 0;
 var randomArray = [];
 
+// Function to generate password with user input
+function generatePassword() {
+  
+      //assign user input to this variable
+      charLength = prompt("Enter the number of characters you would like in your password");
 
-// Function for getting a random element from an array
+      //validate the length of the password, and check input is integer or user clicks cancels 
+      if (charLength === null && !Number.isInteger(charLength) || charLength < 10 || charLength > 64) {
+        alert("Password must be a number between 10 and 64");
+        return;
+
+      } else {
+        // go through confirm questions
+        arrayCollect();
+      }
+    
+      //Character confirm Questions
+      function arrayCollect() {
+
+      var charLower = confirm("Would you like lower case characters?");
+      var charUpper = confirm("Would you like Uppercase characters?");
+      var charNum = confirm("Would you like numbers?");
+      var charSpec = confirm("Would you like special characters?");
+
+      //conditions, at least one character type needs to be selected to move to randomise function
+      if (!charLower && !charUpper && !charNum && !charSpec === true) {
+        alert("You must select at least one character type")
+        return;
+      } else {
+        getRandom();
+      }
+      
+      }
+
+}
+
+  // Function for getting a random element from an array
 function getRandom(arr) {
-
- 
 
   // Push the chosen arrays from the prompt to an empty array
   if (charLower) randomArray.push(lowerCasedCharacters);
@@ -114,37 +146,6 @@ function getRandom(arr) {
 
 }
 
-// Function to generate password with user input
-function generatePassword() {
-  
-      charLength = prompt("Enter the number of characters you'd like in your password");
-
-      //if the user selects cancel, write this result.
-      if (charLength === null) {
-        alert("You have chosen not to select a password.");
-        return;
-      //validate the length of the password, and check input is integer
-      } else if (!Number.isInteger(charLength) || charLength < 10 || charLength > 64 ) {
-        alert("Password must be a number between 10 and 64");
-        return;
-
-      } else {
-        promptReturn();
-      }
-
-      //Character confirm Questions
-
-function promptReturn() {
-  var charLower = confirm("Would you like lower case characters?");
-  var charUpper = confirm("Would you like Uppercase characters?");
-  var charNum = confirm("Would you like numbers?");
-  var charSpec = confirm("Would you like special characters?");
-  
-  }
-
-    }
-  
-  
 
 
       
