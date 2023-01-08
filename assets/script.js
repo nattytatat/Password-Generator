@@ -91,7 +91,7 @@ var upperCasedCharacters = [
 // Function to generate password with user input
 function generatePassword() {
 
-  // new empty array to push selected characters too
+  // new empty array to push user selected characters
   //Having these variables inside the function means the previous function call results are cleared
   var randomArray = [];
   var charLength = 0;
@@ -108,11 +108,10 @@ function generatePassword() {
 
   } else {
     // go through confirm questions
-    // getRandom();
     var charLower = confirm("Would you like to include Lower Case characters?");
-    var charUpper = confirm("Would you like to include Uppercase characters?");
-    var charNum = confirm("Would you like to include numbers?");
-    var charSpec = confirm("Would you like to include special characters?");
+    var charUpper = confirm("Would you like to include Upper Case characters?");
+    var charNum = confirm("Would you like to include Numbers?");
+    var charSpec = confirm("Would you like to include Special characters?");
 
     //conditions, at least one character type needs to be selected to loop through objects
     if (!charLower && !charUpper && !charNum && !charSpec) {
@@ -131,11 +130,12 @@ function generatePassword() {
       //while password length is less than chosen length
       while (password.length < charLength) {
         //add a random character to the empty array/randomArray
-        var randomArrayIndex = Math.floor(Math.random() * randomArray.length);
-        var randomCharIndex = Math.floor(Math.random() * randomArray[randomArrayIndex].length);
+        var i = Math.floor(Math.random() * randomArray.length);
+        // We don't want the commas in the new array!!
+        var j = Math.floor(Math.random() * randomArray[i].length);
 
         // Add the randomly selected character to the password string
-        password += randomArray[randomArrayIndex][randomCharIndex];
+        password += randomArray[i][j];
       }
       //returns the password result to the function. (had to move this out of the randomise function in order for this to work as result was undefined - could still console log result - so function needed to be inside generatePassword in order to work)
       return password;
