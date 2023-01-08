@@ -90,27 +90,40 @@ var upperCasedCharacters = [
 
 // new empty array to push selected characters too
 var randomArray = [];
-charLength = 0;
+var charLength = 0;
 var password = '';
 
-//Character confirm Questions
-function getRandom() {
 
-  var charLower = confirm("Would you like lower case characters?");
-  var charUpper = confirm("Would you like Uppercase characters?");
-  var charNum = confirm("Would you like numbers?");
-  var charSpec = confirm("Would you like special characters?");
+// Function to generate password with user input
+function generatePassword() {
 
-  //conditions, at least one character type needs to be selected to loop through objects
-  if (!charLower && !charUpper && !charNum && !charSpec) {
-    alert("You must select at least one character type")
-    return;
+  //assign user input to this variable. As prompt is input as string, use number constructor to convert
+  charLength = Number(prompt("Enter the number of characters you would like in your password"));
+
+  //validate the length of the password, and check input is integer or user clicks cancel 
+  if (charLength === null || !Number.isInteger(charLength) || charLength < 10 || charLength > 64) {
+    alert("Password must be a number between 10 and 64");
+    // Checking the typeof input as was always returning true when typing a letter
+    // return console.log(typeof charLength);
+
   } else {
+    // go through confirm questions
+    // getRandom();
+    var charLower = confirm("Would you like to include Lower Case characters?");
+    var charUpper = confirm("Would you like to include Uppercase characters?");
+    var charNum = confirm("Would you like to include numbers?");
+    var charSpec = confirm("Would you like to include special characters?");
+
+    //conditions, at least one character type needs to be selected to loop through objects
+    if (!charLower && !charUpper && !charNum && !charSpec) {
+      alert("You must select at least one character type")
+      return;
+    } else {
       // Push the chosen arrays from the prompt to an empty array
-      if (charLower) randomArray.push(lowerCasedCharacters);
-      if (charUpper) randomArray.push(upperCasedCharacters);
-      if (charNum) randomArray.push(numericCharacters);
-      if (charSpec) randomArray.push(specialCharacters);
+      if (charLower === true) randomArray.push(lowerCasedCharacters);
+      if (charUpper === true) randomArray.push(upperCasedCharacters);
+      if (charNum === true) randomArray.push(numericCharacters);
+      if (charSpec === true) randomArray.push(specialCharacters);
 
       // Initialize the password string
       var password = '';
@@ -123,37 +136,11 @@ function getRandom() {
 
         // Add the randomly selected character to the password string
         password += randomArray[randomArrayIndex][randomCharIndex];
-
-      
-    }
-
-    // return password;
-    return console.log(password);
-
-  }
-  
-}
-
-
-
-// Function to generate password with user input
-function generatePassword() {
-  
-      //assign user input to this variable. As prompt is input as string, use number constructor to convert
-      charLength = Number(prompt("Enter the number of characters you would like in your password"));
-
-      //validate the length of the password, and check input is integer or user clicks cancel 
-      if (charLength === null || !Number.isInteger(charLength) || charLength < 10 || charLength > 64) {
-        alert("Password must be a number between 10 and 64");
-        // Checking the typeof input as was always returning true when typing a letter
-        // return console.log(typeof charLength);
-
-      } else {
-        // go through confirm questions
-        getRandom();
       }
-    
-      
+      //returns the password result to the function. (had to move this out of the randomise function in order for this to work as result was undefined - could still console log result - so function needed to be inside generatePassword in order to work)
+      return password;
+    }
+  }
 }
 // Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
