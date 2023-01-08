@@ -94,13 +94,13 @@ var randomArray = [];
 // Function to generate password with user input
 function generatePassword() {
   
-      //assign user input to this variable
-      charLength = prompt("Enter the number of characters you would like in your password");
+      //assign user input to this variable. As prompt is input as string, use number constructor to convert
+      charLength = Number(prompt("Enter the number of characters you would like in your password"));
 
       //validate the length of the password, and check input is integer or user clicks cancels 
-      if (charLength === null && !Number.isInteger(charLength) || charLength < 10 || charLength > 64) {
+      if (charLength === null || !Number.isInteger(charLength) || charLength < 10 || charLength > 64) {
         alert("Password must be a number between 10 and 64");
-        return;
+        return console.log(typeof charLength);
 
       } else {
         // go through confirm questions
@@ -120,8 +120,9 @@ function generatePassword() {
         alert("You must select at least one character type")
         return;
       } else {
-        getRandom();
-      }
+        // getRandom();
+        alert("We are ready to rock!");
+      } 
       
       }
 
