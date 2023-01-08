@@ -88,14 +88,14 @@ var upperCasedCharacters = [
   'Z'
 ];
 
-// new empty array to push selected characters too
-var randomArray = [];
-var charLength = 0;
-var password = '';
-
-
 // Function to generate password with user input
 function generatePassword() {
+
+  // new empty array to push selected characters too
+  //Having these variables inside the function means the previous function call results are cleared
+  var randomArray = [];
+  var charLength = 0;
+  var password = '';
 
   //assign user input to this variable. As prompt is input as string, use number constructor to convert
   charLength = Number(prompt("Enter the number of characters you would like in your password"));
